@@ -1,0 +1,9 @@
+# API Constants
+QUERIES = 'queries'
+STATUSES = 'statues'
+NODE_KEY = 'node_key'
+ENROLL_SECRET = 'enroll_secret'
+HOST_IDENTIFIER = 'host_identifier'
+HOST_DETAILS = 'host_details'
+NODE_INVALID = 'node_invalid'
+SCHEDULE = 'schedule'

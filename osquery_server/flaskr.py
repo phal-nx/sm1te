@@ -6,13 +6,13 @@ Every day give the full config
 
 from flask import Flask, g, jsonify, request
 
-import bson
+# import bson
 import json
 import redis
-import requests
+# import requests
 import uuid
-import osquery_server.api_constants as api
-import from osquery_server import constants
+import api_constants as api
+import constants
 from flask_pymongo import PyMongo
 
 app = Flask(__name__)
@@ -163,4 +163,4 @@ def logger():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, ssl_context=('cert.pem', 'key.pem'))
+    app.run(debug=True, port=8080, ssl_context=('./osquery_test/cert.pem', './osquery_test/key.pem'))

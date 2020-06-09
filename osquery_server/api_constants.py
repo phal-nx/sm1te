@@ -2,7 +2,7 @@
 QUERIES = 'queries'
 STATUSES = 'statues'
 NODE_KEY = 'node_key'
-ENROLL_SECRET = 'enroll_secret'
+ENROLL_SECRET = 'c2e8f53d-63b9-4836'
 HOST_IDENTIFIER = 'host_identifier'
 HOST_DETAILS = 'host_details'
 NODE_INVALID = 'node_invalid'

@@ -1,21 +1,18 @@
-"""
-Every 10 minutes give the diff
-
-Every day give the full config
-"""
-
-from flask import Flask, g, jsonify, request
-
-import bson
+import configparser
 import json
-import redis
-import requests
 import uuid
+
 import api_constants as api
 import constants
-from flask_pymongo import PyMongo
+import redis
+from flask import Flask, g, jsonify, request
 
 app = Flask(__name__)
+
+config = configparser.ConfigParser()
+configFilePath = r'c:\abc.txt'
+config.read(configFilePath)
+
 app.config["MONGO_URI"] = "mongodb://localhost:27017/osquery_server"
 
 node_key_host = 'localhost'
@@ -40,6 +37,7 @@ def node_key_exists(node_key: str):
     if node_key_redis.get('node_key'):
         return True
     return False
+
 
 @app.before_request
 def set_consts():
@@ -69,18 +67,19 @@ def enrollment():
         return jsonify({api.NODE_KEY: None, api.NODE_INVALID: True})
     node_key = str(uuid.uuid4())
 
-    # payload = {
-    #     constants.HOST_IDENTIFIER: host_identifier,
-    #     constants.NODE_KEY: node_key,
-    #     constants.HOST_DETAILS: host_details
-    # }
-    # payload = json.dumps(payload)
+    payload = {
+        constants.HOST_IDENTIFIER: host_identifier,
+        constants.NODE_KEY: node_key,
+        constants.HOST_DETAILS: host_details
+    }
+    payload = json.dumps(payload)
 
     # Two duplicate sets to check for node_key existence
+    # # Maps host uuids to node keys
     host_node_key_redis.set(host_identifier, node_key)
-    node_key_redis.set(node_key, host_identifier)
-    # If NOSQL approach
-    # node_key_db.replace_one({constants.HOST_IDENTIFIER: host_identifier}, payload, upsert=True)
+
+    # # Maps node keys to payloads including host details
+    node_key_redis.set(node_key, payload)
     return jsonify({api.NODE_KEY: node_key, api.NODE_INVALID: False})
 
 
@@ -145,23 +144,7 @@ def distributed_write():
 
 
 def get_schedule():
-    payload = {
-        "apt_packages": {
-            "query": "SELECT name, version FROM deb_packages;",
-            "interval": 60,
-            "description": "Display apt package manager sources.",
-            "snapshot": False,
-            "platform": "ubuntu"
-        },
-        "rpm_packages": {
-            "query": "SELECT name, version FROM rpm_packages;",
-            "interval": 60,
-            "description": "Display apt package manager sources.",
-            "snapshot": False,
-            "platform": "redhat"
-        }
-    }
-    return payload
+    return constants.OSQUERY_CONFIGURATION
 
 
 @app.route('/configuration', methods=['POST'])
@@ -190,7 +173,9 @@ def logger():
     data = request.json['data']
     log_type = request.json['log_type']
 
-    cve_instance = object  # This will be replaced by Mongo / RDB
+    found_cves = {}  # Store the found CVEs on hosts
+
+    cve_db_instance = object  # This will be replaced by Mongo / RDB
     if log_type == 'status':
         """ This is osqueryd status in this form
         {'hostIdentifier': 'phil-dev', 'calendarTime': 'Sun Jun 28 19:50:58 2020 UTC', 'unixTime': '1593373858', 
@@ -202,7 +187,11 @@ def logger():
         # This is a query result
         print(data)
     else:
-        print('\n\n{}\n\n'.format(log_type))
+        for entry in data:
+            package = entry[0]
+            version = entry[1]
+            entry_cves = cve_db_instance.find({'package': package, 'version': {'less_than': version}})  # Template placeholder code
+            found_cves['hostname:REPLACE'].extend(entry_cves)
 
     response = {
         api.NODE_INVALID: node_invalid

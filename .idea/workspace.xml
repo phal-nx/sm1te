@@ -20,11 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7de1dcef-785d-4cf7-9b3a-8e71209999b2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/osquery_server/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/osquery_server/static/config.conf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/osquery_server/tests/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/osquery_server/tests/test_routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/osquery_server/api_constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/osquery_server/api_constants.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/osquery_server/cert.pem" beforeDir="false" afterPath="$PROJECT_DIR$/osquery_server/cert.pem" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/osquery_server/flaskr.py" beforeDir="false" afterPath="$PROJECT_DIR$/osquery_server/flaskr.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/osquery_server/key.pem" beforeDir="false" afterPath="$PROJECT_DIR$/osquery_server/key.pem" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,8 +35,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -126,6 +127,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="280" y="360" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1591656589395">
@@ -148,9 +150,9 @@
       <screen x="72" y="27" width="2488" height="1413" />
     </state>
     <state width="1377" height="373" key="GridCell.Tab.0.right/72.27.2488.1413/2560.0.2560.1440@72.27.2488.1413" timestamp="1591656649389" />
-    <state x="1527" y="27" width="1033" height="1306" key="dock-window-1" timestamp="1591656140973">
+    <state x="1369" y="27" width="1033" height="1306" key="dock-window-1" timestamp="1593369016405">
       <screen x="72" y="27" width="2488" height="1413" />
     </state>
-    <state x="1527" y="27" width="1033" height="1306" key="dock-window-1/72.27.2488.1413/2560.0.2560.1440@72.27.2488.1413" timestamp="1591656140973" />
+    <state x="1369" y="27" width="1033" height="1306" key="dock-window-1/72.27.2488.1413/2560.0.2560.1440@72.27.2488.1413" timestamp="1593369016405" />
   </component>
 </project>

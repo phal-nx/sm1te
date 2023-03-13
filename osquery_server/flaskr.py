@@ -10,8 +10,6 @@ from flask import Flask, g, jsonify, request
 app = Flask(__name__)
 
 config = configparser.ConfigParser()
-configFilePath = r'c:\abc.txt'
-config.read(configFilePath)
 
 app.config["MONGO_URI"] = "mongodb://localhost:27017/osquery_server"
 

@@ -44,14 +44,6 @@ def set_consts():
     g.ENROLL_SECRET = 'c2e8f53d-63b9-4836'
 
 
-# mongo = PyMongo(app)
-
-# app.config['MONGO_HOST'] = 'localhost'
-# app.config['MONGO_PORT'] = '27017'
-# app.config['MONGO_DBNAME'] = 'mongo_test'
-# app.config['MONGO_USERNAME'] = 'root'
-# app.config['MONGO_PASSWORD'] = 'aaa2016'
-# app.config['MONGO_AUTH_SOURCE'] = 'admin' . # root user is typically defined in admin db
 
 nodes_list = {}
 queries_list = {}
@@ -91,20 +83,20 @@ def distributed_read():
     :api_param str node_key: The node_key uuid to find queries for
     :return:
     """
-    # node_key = request.json[api.NODE_KEY]
-    # assert node_key_db.find_one({constants.NODE_KEY: node_key})
-    #
-    # #queries = queries_db.find({constants.NODE_KEY: node_key})
-    #
-    # queries_db.delete({constants.NODE_KEY: node_key})
-    # node_invalid = False
-    #
-    # response = {
-    #     api.NODE_KEY: node_key,
-    #     api.QUERIES: queries,
-    #     api.NODE_INVALID: node_invalid
-    # }
-    # return jsonify(response)
+    node_key = request.json[api.NODE_KEY]
+    assert node_key_db.find_one({constants.NODE_KEY: node_key})
+    
+    #queries = queries_db.find({constants.NODE_KEY: node_key})
+    
+    queries_db.delete({constants.NODE_KEY: node_key})
+    node_invalid = False
+    
+    response = {
+        api.NODE_KEY: node_key,
+        api.QUERIES: queries,
+        api.NODE_INVALID: node_invalid
+    }
+    return jsonify(response)
 
 
 @app.route('/log', methods=['POST'])
